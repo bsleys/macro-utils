@@ -7,7 +7,7 @@
   "minimumCoreVersion": "0.6.0",
   "compatibleCoreVersion": "0.6.0",
   "url": "https://github.com/bsleys/macro-utils",
-  "download": "https://github.com/death-save/combat-utility-belt/archive/master.zip",
+  "download": "https://github.com/bsleys/macro-utils/archive/master.zip",
   "manifest": "https://raw.githubusercontent.com/bsleys/macro-utils/master/module.json",
   "esmodules": ["macro-utils.js"],
   "packs": [
