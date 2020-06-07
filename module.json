@@ -2,7 +2,7 @@
   "name": "macro-utils",
   "title": "Macro Utilities",
   "description": "Adds variaus utility functions for use in macros.",
-  "version": "0.1",
+  "version": "0.2",
   "author": "Bob Sleys [Thirsterhall#2424]",
   "minimumCoreVersion": "0.6.0",
   "compatibleCoreVersion": "0.6.0",

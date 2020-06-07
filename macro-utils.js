@@ -1,6 +1,7 @@
 export function MacroUtils () {
 	//takes two tokens of any size and calculates the distance between them
-	function getDistance (t1, t2) {
+	function getDistance (t1, t2, wallblocking = false) {
+		//Log("get distance callsed");
 		var x, x1, y, y1, d, r, segments=[], rdistance, distance;
 		for (x = 0; x < t1.data.width; x++) {
 			for (y = 0; y < t1.data.height; y++) {
@@ -8,10 +9,20 @@ export function MacroUtils () {
 		    	for (x1 = 0; x1 < t2.data.width; x1++) {
 		      		for (y1 = 0; y1 < t2.data.height; y1++){
 				   		const dest = new PIXI.Point(...canvas.grid.getCenter(t2.data.x + (canvas.dimensions.size * x1), t2.data.y + (canvas.dimensions.size * y1)));
-				   		segments.push({ray: new Ray(origin, dest)});
+				   		const r = new Ray(origin, dest)
+				   		if (wallblocking && canvas.walls.checkCollision(r)) {
+				   			//Log(`ray ${r} blocked due to walls`);
+				   			continue;
+				   		}
+				   		segments.push({ray: r});
 		    		}
 				}
 			}
+		}
+		console.log(segments);
+		if (segments.length == 0) {
+			Log(`${t2.data.name} full blocked by walls`);
+			return -1;
 		}
 		rdistance = canvas.grid.measureDistances(segments, {gridSpaces:true});
 		distance = rdistance[0];
@@ -51,6 +62,10 @@ export function MacroUtils () {
 };
 
 Hooks.once("init", async  function() {
-	console.log(`Init Macro-Utils`);
+	Log("Module Initialize");
 	window.MacroUtils = MacroUtils();
 });
+
+function Log(s){
+	console.log("%cMacro-Utils" +  `%c | ${s}`, "color:Teal", "color:black")
+}
